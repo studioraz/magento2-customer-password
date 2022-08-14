@@ -1,5 +1,5 @@
 {
-    "name": "studiorez/magento-customer-password",
+    "name": "studioraz/magento-customer-password",
     "description": "Magento 2 - Customer Password",
     "type": "magento2-module",
     "version": "1.1.0",
@@ -16,9 +16,6 @@
         }
     ],
     "require": {
-        "magento/framework": ">=100.0.0",
-        "magento/module-backend": ">=100.0.0",
-        "magento/module-customer": ">=100.0.0"
     },
     "keywords": [
         "magento 2",
