@@ -117,7 +117,20 @@ class ChangeCustomerPassword extends Command
         InputInterface $input,
         OutputInterface $output
     ) {
-        //$this->state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND);
+
+        $isAreaCode = 0;
+
+        try {
+            if ($this->state->getAreaCode()) {
+                $isAreaCode = 1;
+            }
+        } catch (\Exception $e) {
+            $isAreaCode = 0;
+        }
+        if (!$isAreaCode) {
+            $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
+        }
+
         $customerId = $input->getOption(self::ARG_CUSTOMER_ID);
         $customerEmail = $input->getOption(self::ARG_CUSTOMER_EMAIL);
         $password = $input->getOption(self::ARG_CUSTOMER_PASSWORD);
@@ -130,15 +143,11 @@ class ChangeCustomerPassword extends Command
             $output->writeln("<error>Enter either one of the field --customer-id <customer ID> or --customer-email <customer email></error>");
         } else {
             try {
-                $func = null;
                 if ($customerEmail) {
-                    $func = [$this->accountManagement, 'changePassword'];
-                    $args = [$customerEmail, $password];
+                    $this->accountManagement->changePassword($customerEmail, $password);
                 } elseif ($customerId) {
-                    $func = [$this->accountManagement, 'changePasswordById'];
-                    $args = [$customerId, $password];
+                    $this->accountManagement->changePasswordById($customerId, $password);
                 }
-                $this->state->emulateAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML, $func, $args);
                 $output->writeln('Customer password has been changed.');
             } catch (\Exception $e) {
                 $output->write($e->getMessage());

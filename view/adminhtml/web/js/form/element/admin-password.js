@@ -21,34 +21,19 @@ define(
         return Abstract.extend(
             {
                 defaults: {
-                    focused: false
+                    focused: false,
                 },
                 initialize: function () {
                     this._super();
                     var self = this;
-                    var infoTab = registry.get('customer_form.areas.customer').active.subscribe(function(status) {
-                        if (status) {
-                            var admin_password = registry.get(self.parentName + '.' + 'admin_password');
-                            admin_password.hide();
-                            self.focused.subscribe(
-                                function (value) {
-                                    if (value) {
-                                        admin_password.show();
-                                    } else if (!self.value().length) {
-                                        admin_password.hide();
-                                    }
-                                }
-                            );
-                            infoTab.dispose();
-                        }
-                    });
-                    
-                    registry.get(
-                        'customer_form.areas.customer.customer.email',
-                        function (element) {
-                            if (element.value() === '') {
-                                var password_section = registry.get(self.parentName);
-                                password_section.visible(false);
+                    var admin_password = registry.get(self.parentName + '.' + 'admin_password');
+                    admin_password.hide();
+                    this.focused.subscribe(
+                        function (value) {
+                            if (value) {
+                                admin_password.show();
+                            } else if (!self.value().length) {
+                                admin_password.hide();
                             }
                         }
                     );

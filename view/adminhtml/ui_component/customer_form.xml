@@ -41,7 +41,7 @@
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
                         <item name="source" xsi:type="string">customer</item>
-                        <item name="label" xsi:type="string" translate="true">Change Password</item>
+                        <item name="label" xsi:type="string" translate="true">Customer Password</item>
                         <item name="formElement" xsi:type="string">input</item>
                         <item name="elementTmpl" xsi:type="string">KiwiCommerce_CustomerPassword/form/element/password</item>
                         <item name="component" xsi:type="string">KiwiCommerce_CustomerPassword/js/form/element/admin-password</item>
