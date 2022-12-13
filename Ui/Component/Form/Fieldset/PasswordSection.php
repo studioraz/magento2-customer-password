@@ -30,16 +30,16 @@ class PasswordSection extends \Magento\Ui\Component\Form\Fieldset
 
     /**
      * PasswordSection constructor.
-     * @param ContextInterface $context
-     * @param array $components
-     * @param array $data
      * @param Data $helper
+     * @param ContextInterface $context
+     * @param $components
+     * @param array $data
      */
     public function __construct(
+        Data $helper,
         ContextInterface $context,
         $components = [],
-        array $data = [],
-        Data $helper
+        array $data = []
     ) {
         parent::__construct($context, $components, $data);
         $this->helper = $helper;
